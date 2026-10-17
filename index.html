@@ -6,7 +6,112 @@
 <title>Himanshu | Frontend Developer</title>
 <meta name="description" content="Portfolio of Himanshu, CS student and aspiring frontend developer. Learning React and Python.">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+:root{--rgb:0,240,255;--c:#00f0ff;--m:#b44cff;--ink:#e8f7ff;--mute:#7f93a6;--line:rgba(var(--rgb),.22);--glass:rgba(8,14,20,.55)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#000;color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Unbounded',system-ui,sans-serif;line-height:1.1;font-weight:700}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--c),var(--m));z-index:50;box-shadow:0 0 12px var(--c)}
+#loader{position:fixed;inset:0;background:#000;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .8s,visibility .8s}
+#loader.done{opacity:0;visibility:hidden}
+#loader p{font-family:'Unbounded',sans-serif;color:var(--c);font-size:.9rem;letter-spacing:.2em;text-shadow:0 0 14px var(--c)}
+#loader i{display:block;width:220px;height:2px;background:#122;overflow:hidden}
+#loader i b{display:block;height:100%;width:0;background:var(--c);box-shadow:0 0 12px var(--c);animation:ld 1.4s ease forwards}
+@keyframes ld{to{width:100%}}
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:20;display:flex;gap:4px;padding:6px;border-radius:14px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 30px rgba(var(--rgb),.08)}
+nav a{color:var(--mute);text-decoration:none;padding:9px 18px;border-radius:10px;font-size:.88rem;font-weight:500;transition:.25s}
+nav a:hover,nav a:focus-visible,nav a.on{color:#000;background:var(--c);outline:none;box-shadow:0 0 18px rgba(var(--rgb),.6)}
+section{min-height:100vh;padding:120px 7vw 70px;max-width:1240px;margin:auto;display:flex;flex-direction:column;justify-content:center;position:relative}
+#home{padding-top:100px}
+.tag{display:inline-flex;align-items:center;gap:10px;color:var(--c);font-size:.9rem;margin-bottom:22px;padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:var(--glass);width:fit-content}
+.tag:before{content:"";width:8px;height:8px;border-radius:50%;background:#2dff8a;box-shadow:0 0 10px #2dff8a;animation:pl 1.6s infinite}
+@keyframes pl{50%{opacity:.3}}
+h1{font-size:clamp(2.4rem,8.5vw,6.6rem);letter-spacing:-.02em;text-shadow:0 0 40px rgba(var(--rgb),.25)}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--c),var(--m));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(var(--rgb),.4))}
+.role{font-size:clamp(1.1rem,2.4vw,1.6rem);margin:22px 0 10px;color:var(--ink);min-height:2.2em}
+.role span:after{content:"|";color:var(--c);animation:bl 1s steps(1) infinite;margin-left:3px}
+@keyframes bl{50%{opacity:0}}
+.sub{color:var(--mute);max-width:52ch;margin-bottom:34px}
+.btn{display:inline-block;padding:14px 30px;border-radius:12px;text-decoration:none;font-weight:600;margin:0 12px 12px 0;transition:.3s;position:relative}
+.btn.p{background:var(--c);color:#000;box-shadow:0 0 28px rgba(var(--rgb),.45)}
+.btn.g{border:1px solid var(--line);color:var(--ink);background:var(--glass)}
+.btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 10px 40px rgba(var(--rgb),.5)}
+.floor{position:absolute;left:-10vw;right:-10vw;bottom:0;height:42vh;z-index:-1;overflow:hidden;pointer-events:none;mask-image:linear-gradient(to top,#000 10%,transparent);-webkit-mask-image:linear-gradient(to top,#000 10%,transparent)}
+.floor div{position:absolute;inset:-100% -50% 0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:60px 60px;transform:perspective(380px) rotateX(68deg);animation:fl 2.4s linear infinite}
+@keyframes fl{to{background-position:0 60px}}
+.scroll{position:absolute;bottom:34px;left:7vw;color:var(--mute);font-size:.8rem;display:flex;align-items:center;gap:10px}
+.scroll i{width:1px;height:38px;background:linear-gradient(var(--c),transparent);animation:sc 1.8s infinite}
+@keyframes sc{50%{transform:scaleY(.4);transform-origin:top}}
+h2{font-size:clamp(1.9rem,4.4vw,3.2rem);margin-bottom:34px}
+h2:after{content:"";display:block;width:70px;height:3px;margin-top:16px;background:linear-gradient(90deg,var(--c),var(--m));box-shadow:0 0 14px var(--c)}
+.glass{background:rgba(6,12,18,.82);border:1px solid var(--line);border-radius:18px;padding:28px}
+.about{display:grid;grid-template-columns:1.5fr 1fr;gap:22px}
+.about p{color:var(--mute);margin-bottom:14px;max-width:62ch}
+.about b{color:var(--ink);font-weight:600}
+.stats{display:grid;gap:14px}
+.stat{text-align:center}
+.stat strong{display:block;font-family:'Unbounded',sans-serif;font-size:2.6rem;color:var(--c);text-shadow:0 0 22px rgba(var(--rgb),.6)}
+.stat span{color:var(--mute);font-size:.9rem}
+.marq{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);margin:6px 0}
+.marq div{display:flex;gap:14px;width:max-content;animation:mq 28s linear infinite}
+.marq.r div{animation-direction:reverse;animation-duration:34s}
+.marq:hover div{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.chip{padding:14px 28px;border:1px solid var(--line);border-radius:14px;background:var(--glass);font-weight:600;white-space:nowrap;transition:.25s}
+.chip:hover{border-color:var(--c);color:var(--c);box-shadow:0 0 22px rgba(var(--rgb),.35)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px;perspective:1000px}
+.card{position:relative;overflow:hidden;transition:transform .15s ease-out,border-color .3s,box-shadow .3s;transform-style:preserve-3d;}
+.card:hover{border-color:var(--c);box-shadow:0 0 40px rgba(var(--rgb),.2)}
+.card:before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--x,50%) var(--y,50%),rgba(var(--rgb),.18),transparent 60%);opacity:0;transition:.3s;pointer-events:none}
+.card:hover:before{opacity:1}
+.card h3{font-size:1.35rem;margin-bottom:8px;transform:translateZ(30px)}
+.card small{display:block;color:var(--c);margin-bottom:14px;font-size:.85rem}
+.card p{color:var(--mute);margin-bottom:20px;font-size:.95rem}
+.card a{color:var(--ink);text-decoration:none;font-weight:600;border-bottom:1px solid var(--c);padding-bottom:2px}
+.card a:hover{color:var(--c)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.links a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);font-family:'Unbounded',sans-serif;font-size:1.2rem;transition:.3s}
+.links a small{font-family:'Manrope',sans-serif;color:var(--mute);font-size:.9rem}
+.links a:hover{border-color:var(--c);transform:translateY(-6px);box-shadow:0 12px 40px rgba(var(--rgb),.25)}
+footer{text-align:center;color:var(--mute);padding:34px;font-size:.85rem;border-top:1px solid var(--line)}
+.rv{opacity:0;transform:translateY(40px) scale(.98);transition:opacity .9s,transform .9s}
+.rv.in{opacity:1;transform:none}
+
+.learn{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:34px}
+.learn .glass{padding:22px}
+.learn h3{font-size:1.1rem;margin-bottom:6px}
+.learn p{color:var(--mute);font-size:.9rem;margin-bottom:14px}
+.pb{height:5px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden}
+.pb i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--c),var(--m));box-shadow:0 0 12px var(--c);transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.in .pb i{width:var(--w)}
+.lbl{font-size:.8rem;color:var(--c);margin-bottom:8px;display:block}
+.tl{position:relative;padding-left:34px;max-width:760px}
+.tl:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--c),var(--m),transparent);box-shadow:0 0 12px var(--c)}
+.tl .it{position:relative;margin-bottom:22px}
+.tl .it:before{content:"";position:absolute;left:-34px;top:26px;width:18px;height:18px;border-radius:50%;background:#000;border:2px solid var(--c);box-shadow:0 0 14px var(--c)}
+.tl .it.now:before{background:var(--c);animation:pl 1.4s infinite}
+.tl h3{font-size:1.05rem;margin-bottom:4px}
+.tl small{color:var(--c);display:block;margin-bottom:6px}
+.tl p{color:var(--mute);font-size:.95rem}
+.phone{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
+.phone .num{font-family:'Unbounded',sans-serif;font-size:clamp(1.3rem,4vw,2.2rem);color:var(--c);text-shadow:0 0 24px rgba(var(--rgb),.5);text-decoration:none}
+.phone small{display:block;color:var(--mute);font-family:'Manrope',sans-serif;font-size:.9rem}
+.phone .acts{display:flex;flex-wrap:wrap;gap:10px}
+.phone .btn{margin:0;border:0;font:inherit;font-weight:600;cursor:pointer}
+.fab{position:fixed;right:20px;bottom:20px;z-index:30;display:flex;flex-direction:column;gap:12px}
+.fab a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:1.4rem;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:.3s;box-shadow:0 0 20px rgba(var(--rgb),.25)}
+.fab a:hover{transform:scale(1.15);border-color:var(--c);box-shadow:0 0 30px rgba(var(--rgb),.6)}
+#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,120px);background:var(--c);color:#000;font-weight:600;padding:12px 24px;border-radius:12px;z-index:150;transition:transform .4s;box-shadow:0 0 30px rgba(var(--rgb),.6)}
+#toast.show{transform:translate(-50%,0)}
+.theme{position:fixed;left:20px;bottom:24px;z-index:30;display:flex;gap:10px;padding:10px 12px;border-radius:99px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.theme button{width:20px;height:20px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:.25s}
+.theme button:hover,.theme button.on{transform:scale(1.25);border-color:#fff}
+@media(max-width:800px){.theme{left:50%;transform:translateX(-50%);bottom:14px}.fab{bottom:70px;right:14px}.fab a{width:46px;height:46px}}
+@media(max-width:800px){.about{grid-template-columns:1fr}nav a{padding:8px 10px;font-size:.75rem}.scroll{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
 <div id="loader"><p>LOADING PORTFOLIO</p><i><b></b></i></div>
@@ -89,99 +194,124 @@
 <footer>© Himanshu</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="script.js"></script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Himanshu | Frontend Developer</title>
-<meta name="description" content="Portfolio of Himanshu, CS student and aspiring frontend developer. Learning React and Python.">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div id="loader"><p>LOADING PORTFOLIO</p><i><b></b></i></div>
-<div id="toast" role="status">Number copied</div>
-<div class="fab"><a href="tel:+919996255639" aria-label="Call Himanshu" title="Call">&#128222;</a><a href="https://wa.me/919996255639" target="_blank" rel="noopener" aria-label="WhatsApp Himanshu" title="WhatsApp">&#128172;</a></div>
-<div class="theme" id="theme" aria-label="Accent colour"><button data-i="0" class="on" style="background:#00f0ff" aria-label="Cyan"></button><button data-i="1" style="background:#2dff8a" aria-label="Green"></button><button data-i="2" style="background:#ff3d81" aria-label="Pink"></button><button data-i="3" style="background:#ffb020" aria-label="Amber"></button></div>
-<div id="bar"></div>
-<canvas id="bg" aria-hidden="true"></canvas>
-<nav aria-label="Main"><a href="#home" class="on">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
+<script>
+window.__ok=1;
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var mx=0,my=0,sy=0,vel=0,last=0;
+setTimeout(function(){document.getElementById('loader').classList.add('done');intro()},1500);
 
-<section id="home">
-  <div class="tag">Open to internships &amp; junior roles</div>
-  <h1 id="name"><em>Himanshu</em></h1>
-  <p class="role"><span id="role"></span></p>
-  <p class="sub">CS student building fast, clean and interactive websites, with a focus on smooth 3D and motion on the web.</p>
-  <div><a class="btn p" href="#projects">View projects</a><a class="btn g" href="#contact">Contact me</a></div>
-  <div class="scroll"><i></i>Scroll to explore</div>
-  <div class="floor"><div></div></div>
-</section>
+/* name scramble + role typing */
+function intro(){
+  var el=document.getElementById('name'),em=el.querySelector('em'),txt='Himanshu',ch='01<>/{}#%&';
+  if(!reduce){var f=0,iv=setInterval(function(){f++;em.textContent=txt.split('').map(function(c,i){return i<f/3?c:ch[Math.floor(Math.random()*ch.length)]}).join('');if(f>=txt.length*3){clearInterval(iv);em.textContent=txt}},45)}
+  var roles=['Frontend Developer','React Learner','Python Learner','3D Web Creator','Problem Solver'],ri=0,ci=0,del=false,out=document.getElementById('role');
+  (function type(){
+    var w=roles[ri];out.textContent=w.slice(0,ci);
+    if(!del&&ci===w.length){del=true;return setTimeout(type,1400)}
+    if(del&&ci===0){del=false;ri=(ri+1)%roles.length}
+    ci+=del?-1:1;setTimeout(type,del?35:75);
+  })();
+}
 
-<section id="about">
-  <h2 class="rv">About me</h2>
-  <div class="about rv">
-    <div class="glass">
-      <p>I’m a <b>Computer Science student at Suresh Gyan Vihar University</b>. I solve problems in C and C++, and build for the web with HTML, CSS and JavaScript.</p>
-      <p>I’m currently learning <b>React</b> and <b>Python</b>, and shipping real projects on GitHub Pages. I also completed a <b>1-year diploma (CCA course)</b> covering JavaScript, CSS, SQL, HTML, C and C++.</p>
-      <p>My goal is a frontend developer role where I can build smooth, great-looking interfaces.</p>
-    </div>
-    <div class="stats">
-      <div class="glass stat"><strong data-n="3">0</strong><span>Projects built</span></div>
-      <div class="glass stat"><strong data-n="6">0</strong><span>Languages learned<br>HTML, CSS, JS, SQL, C, C++</span></div>
-    </div>
-  </div>
-</section>
+/* reveal, counters, nav highlight */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(count);io.unobserve(e.target)}})},{threshold:.2});
+document.querySelectorAll('.rv').forEach(function(x){io.observe(x)});
+function count(n){var t=+n.dataset.n,i=0;var v=setInterval(function(){i++;n.textContent=i;if(i>=t)clearInterval(v)},250)}
+var links=document.querySelectorAll('nav a'),secs=[].slice.call(document.querySelectorAll('section'));
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{threshold:.5});
+secs.forEach(function(s){so.observe(s)});
 
-<section id="skills">
-  <h2 class="rv">Skills</h2>
-  <div class="rv">
-    <div class="marq"><div><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">React (learning)</span><span class="chip">React Native</span><span class="chip">Python (learning)</span><span class="chip">Three.js</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">React (learning)</span><span class="chip">React Native</span><span class="chip">Python (learning)</span><span class="chip">Three.js</span></div></div>
-    <div class="marq r"><div><span class="chip">C</span><span class="chip">C++</span><span class="chip">SQL</span><span class="chip">Git &amp; GitHub</span><span class="chip">VS Code</span><span class="chip">GitHub Pages</span><span class="chip">Expo</span><span class="chip">C</span><span class="chip">C++</span><span class="chip">SQL</span><span class="chip">Git &amp; GitHub</span><span class="chip">VS Code</span><span class="chip">GitHub Pages</span><span class="chip">Expo</span></div></div>
-  </div>
-  <div class="learn rv">
-    <div class="glass"><span class="lbl">Learning now</span><h3>React</h3><p>Components, hooks and building real apps.</p></div>
-    <div class="glass"><span class="lbl">Learning now</span><h3>Python</h3><p>Fundamentals, problem solving and small scripts.</p></div>
-    <div class="glass"><span class="lbl">Sharpening</span><h3>JavaScript</h3><p>Array methods, async/await and clean code.</p></div>
-  </div>
-</section>
+/* input */
+var bar=document.getElementById('bar');
+addEventListener('mousemove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+addEventListener('scroll',function(){var h=document.documentElement.scrollHeight-innerHeight;sy=h>0?scrollY/h:0;bar.style.width=(sy*100)+'%'},{passive:true});
 
-<section id="journey">
-  <h2 class="rv">My journey</h2>
-  <div class="tl rv">
-    <div class="it glass"><small>Education</small><h3>Computer Science student, Suresh Gyan Vihar University</h3><p>Building a base in C, C++ and problem solving.</p></div>
-    <div class="it glass"><small>Diploma</small><h3>1-year Diploma, CCA course</h3><p>Learned JavaScript, CSS, SQL, HTML, C and C++.</p></div>
-    <div class="it glass now"><small>Now</small><h3>React and Python</h3><p>Shipping projects on GitHub Pages while levelling up.</p></div>
-    <div class="it glass"><small>Goal</small><h3>Frontend developer</h3><p>Smooth, fast and great-looking interfaces.</p></div>
-  </div>
-</section>
+/* card 3D tilt + spotlight */
+if(!reduce)document.querySelectorAll('.card').forEach(function(el){
+  el.addEventListener('mousemove',function(e){var b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width,y=(e.clientY-b.top)/b.height;
+    el.style.setProperty('--x',x*100+'%');el.style.setProperty('--y',y*100+'%');
+    el.style.transform='rotateY('+(x-.5)*18+'deg) rotateX('+(.5-y)*18+'deg) translateZ(14px)'});
+  el.addEventListener('mouseleave',function(){el.style.transform=''});
+});
 
-<section id="projects">
-  <h2 class="rv">Projects</h2>
-  <div class="grid rv">
-    <div class="glass card"><h3>FocusFlow</h3><small>HTML · CSS · JavaScript</small><p>Pomodoro and study timer that keeps you focused in short, timed sessions.</p><a href="https://himanshu278274.github.io/focus-flow-/" target="_blank" rel="noopener">Open live demo</a> &nbsp; <a href="https://github.com/Himanshu278274/focus-flow-" target="_blank" rel="noopener">View code</a></div>
-    <div class="glass card"><h3>IronFlow</h3><small>HTML · CSS · JavaScript</small><p>Gym tracker to log your workouts and stay consistent with your routine.</p><a href="https://himanshu278274.github.io/ironflow/" target="_blank" rel="noopener">Open live demo</a> &nbsp; <a href="https://github.com/Himanshu278274/ironflow" target="_blank" rel="noopener">View code</a></div>
-    <div class="glass card"><h3>Self Improve</h3><small>React Native · Expo</small><p>Task management mobile app to plan your day and finish what matters.</p><a href="https://himanshu278274.github.io/self-improve/" target="_blank" rel="noopener">Open live demo</a> &nbsp; <a href="https://github.com/Himanshu278274/self-improve" target="_blank" rel="noopener">View code</a></div>
-  </div>
-</section>
 
-<section id="contact">
-  <h2 class="rv">Let’s connect</h2>
-  <div class="glass phone rv">
-    <div><small>Call or WhatsApp me</small><a class="num" href="tel:+919996255639">+91 99962 55639</a></div>
-    <div class="acts"><a class="btn p" href="tel:+919996255639">Call now</a><a class="btn g" href="https://wa.me/919996255639" target="_blank" rel="noopener">WhatsApp</a><button class="btn g" id="copy" type="button">Copy number</button></div>
-  </div>
-  <div class="links rv">
-    <a class="glass" href="https://github.com/Himanshu278274" target="_blank" rel="noopener">GitHub<small>Himanshu278274</small></a>
-    <a class="glass" href="https://www.linkedin.com/in/himanshu-sharma-172544372" target="_blank" rel="noopener">LinkedIn<small>Himanshu</small></a>
-    <a class="glass" href="https://www.instagram.com/himanshu._.happy" target="_blank" rel="noopener">Instagram<small>@himanshu._.happy</small></a>
-  </div>
-</section>
-<footer>© Himanshu</footer>
+/* magnetic buttons */
+if(!reduce)document.querySelectorAll('.btn').forEach(function(b){
+  b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.25+'px,'+(e.clientY-r.top-r.height/2)*.35+'px)'});
+  b.addEventListener('mouseleave',function(){b.style.transform=''});
+});
+/* copy number */
+var toast=document.getElementById('toast');
+function say(t){toast.textContent=t;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},1800)}
+document.getElementById('copy').addEventListener('click',function(){
+  var n='9996255639';
+  if(navigator.clipboard)navigator.clipboard.writeText(n).then(function(){say('Number copied')},function(){say(n)});else say(n);
+});
+/* accent colour switcher */
+var pal=[{c:'#00f0ff',r:'0,240,255',h:.5},{c:'#2dff8a',r:'45,255,138',h:.4},{c:'#ff3d81',r:'255,61,129',h:.94},{c:'#ffb020',r:'255,176,32',h:.11}],hue=.5,accent=0x00f0ff,onAccent=null;
+document.querySelectorAll('#theme button').forEach(function(b){b.addEventListener('click',function(){
+  var p=pal[+b.dataset.i],root=document.documentElement.style;root.setProperty('--c',p.c);root.setProperty('--rgb',p.r);
+  document.querySelectorAll('#theme button').forEach(function(x){x.classList.toggle('on',x===b)});
+  hue=p.h;accent=parseInt(p.c.slice(1),16);if(onAccent)onAccent();
+})});
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="script.js"></script>
+/* THREE scene */
+if(typeof THREE==='undefined')return;
+var cv=document.getElementById('bg'),R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+R.setPixelRatio(Math.min(devicePixelRatio,1.5));
+var S=new THREE.Scene(),C=new THREE.PerspectiveCamera(60,1,.1,200);C.position.z=9;
+var mob=innerWidth<800;
+/* stars */
+var N=1800,p=new Float32Array(N*3),k=new Float32Array(N*3),c1=new THREE.Color('#00f0ff'),c2=new THREE.Color('#b44cff'),c3=new THREE.Color('#ffffff');
+for(var i=0;i<N;i++){var r=12+Math.random()*60,t=Math.random()*6.283,u=Math.acos(2*Math.random()-1);
+  p[i*3]=r*Math.sin(u)*Math.cos(t);p[i*3+1]=r*Math.sin(u)*Math.sin(t);p[i*3+2]=r*Math.cos(u);
+  var c=Math.random()<.15?c1:Math.random()<.2?c2:c3;k[i*3]=c.r;k[i*3+1]=c.g;k[i*3+2]=c.b}
+var sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(p,3));sg.setAttribute('color',new THREE.BufferAttribute(k,3));
+var stars=new THREE.Points(sg,new THREE.PointsMaterial({size:.09,vertexColors:true,transparent:true,opacity:.85,depthWrite:false}));S.add(stars);
+/* core object: knot + shell + rings */
+var core=new THREE.Group();S.add(core);
+function wire(g,col,op){return new THREE.Mesh(g,new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op}))}
+var knot=wire(new THREE.TorusKnotGeometry(1.5,.38,100,12,2,3),0x00f0ff,.55);core.add(knot);
+var shell=wire(new THREE.IcosahedronGeometry(2.7,1),0xb44cff,.28);core.add(shell);
+var inner=new THREE.Mesh(new THREE.OctahedronGeometry(.55),new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true}));core.add(inner);
+var rings=[];[3.4,4.1,4.9].forEach(function(rad,i){var m=new THREE.Mesh(new THREE.TorusGeometry(rad,.012,8,140),new THREE.MeshBasicMaterial({color:i==1?0xb44cff:0x00f0ff,transparent:true,opacity:.7}));m.rotation.x=1+i*.5;m.rotation.y=i*.7;core.add(m);rings.push(m)});
+/* orbiting satellites */
+var sats=[];for(var j=0;j<10;j++){var s=new THREE.Mesh(new THREE.BoxGeometry(.14,.14,.14),new THREE.MeshBasicMaterial({color:j%2?0x00f0ff:0xb44cff,wireframe:true}));s.userData={a:Math.random()*6.28,r:3+Math.random()*2.2,sp:.2+Math.random()*.5,y:(Math.random()-.5)*3};core.add(s);sats.push(s)}
+/* floating shards */
+var shards=[];for(var q=0;q<12;q++){var sh=wire(new THREE.TetrahedronGeometry(.25+Math.random()*.35),q%2?0x00f0ff:0xb44cff,.6);sh.position.set((Math.random()-.5)*34,(Math.random()-.5)*20,-4-Math.random()*20);sh.userData={rx:Math.random()*.01,ry:Math.random()*.01,fy:Math.random()*6};S.add(sh);shards.push(sh)}
+onAccent=function(){rings.forEach(function(m,i){if(i!==1)m.material.color.setHex(accent)});sats.forEach(function(s,j){if(j%2)s.material.color.setHex(accent)});shards.forEach(function(s,q){if(q%2)s.material.color.setHex(accent)})};
+function size(){R.setSize(innerWidth,innerHeight,false);C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix();mob=innerWidth<800}
+addEventListener('resize',size);size();
+var T=0,cs=0,tx=0;
+function loop(now){
+  vel=Math.abs(sy-last)*60;last+=(sy-last)*.1;vel=Math.min(vel,1);
+  if(!reduce){
+    T+=.008+vel*.06;
+    stars.rotation.y=T*.05;stars.rotation.x=sy*1.2;
+    /* core follows scroll: slides side to side, zooms, spins faster when scrolling */
+    var target=mob?0:3.2*Math.cos(sy*Math.PI*3.2);
+    tx+=(target-tx)*.05;core.position.x=tx;core.position.y=Math.sin(T*2)*.25-sy*1.2;
+    var sc=(mob?.62:1)*(1+.35*Math.sin(sy*Math.PI*2));core.scale.setScalar(sc);
+    knot.rotation.x=T*.7;knot.rotation.y=T*.5+mx*1.5;
+    shell.rotation.y=-T*.4;shell.rotation.x=T*.2+my;
+    inner.rotation.x=T*2;inner.rotation.y=T*1.4;
+    rings.forEach(function(m,i){m.rotation.z=T*(.4+i*.25)*(i%2?-1:1)});
+    sats.forEach(function(s){var d=s.userData;d.a+=d.sp*.01*(1+vel*8);s.position.set(Math.cos(d.a)*d.r,d.y+Math.sin(d.a*2)*.4,Math.sin(d.a)*d.r);s.rotation.x+=.03;s.rotation.y+=.03});
+    shards.forEach(function(s){var d=s.userData;s.rotation.x+=d.rx+vel*.05;s.rotation.y+=d.ry+vel*.05;s.position.y+=Math.sin(T*2+d.fy)*.004});
+    /* camera: mouse parallax + fly-through on scroll */
+    C.position.x+=(mx*2.4-C.position.x)*.04;C.position.y+=(-my*1.6-C.position.y)*.04;
+    C.position.z=9-sy*3+vel*1.5;C.lookAt(0,0,0);
+    knot.material.color.setHSL((hue+sy*.25)%1,1,.5);
+  }
+  R.render(S,C);requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+})();
+</script>
+<script>
+setTimeout(function(){if(window.__ok)return;var l=document.getElementById('loader');if(l)l.classList.add('done');document.querySelectorAll('.rv').forEach(function(x){x.classList.add('in')})},4000);
+</script>
+
 </body>
 </html>
